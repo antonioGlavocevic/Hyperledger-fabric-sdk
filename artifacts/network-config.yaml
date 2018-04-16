@@ -1,0 +1,57 @@
+name: "net-basic"
+version: "1.0"
+
+channels:
+  mychannel:
+    orderers:
+      - orderer.example.com
+
+    peers:
+      peer0.org1.example.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+
+organizations:
+  Org1:
+    mspid: Org1MSP
+
+    peers:
+      - peer0.org1.example.com
+    certificateAuthorities:
+      - ca.org1.example.com
+    adminPrivateKey:
+      path: artifacts/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/a17418e1bda56ba78dcc10f9c3b918b79f9cc34e1b3b95df869dfed3a32b51a9_sk
+    signedCert:
+      path: artifacts/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/Admin@org1.example.com-cert.pem
+
+orderers:
+  orderer.example.com:
+    url: grpcs://ec2-18-220-228-226.us-east-2.compute.amazonaws.com:7050
+    grpcOptions:
+      ssl-target-name-override: orderer.example.com
+      grpc-max-send-message-length: 15
+    tlsCACerts:
+      path: artifacts/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/ca.crt
+
+peers:
+  peer0.org1.example.com:
+    url: grpcs://ec2-18-216-131-17.us-east-2.compute.amazonaws.com:7051
+    eventUrl: grpcs://ec2-18-216-131-17.us-east-2.compute.amazonaws.com:7053
+    grpcOptions:
+      ssl-target-name-override: peer0.org1.example.com
+    tlsCACerts:
+      path: artifacts/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
+
+certificateAuthorities:
+  ca.org1.example.com:
+    url: https://ec2-18-216-131-17.us-east-2.compute.amazonaws.com:7054
+    httpOptions:
+      verify: false
+    tlsCACerts:
+      path: artifacts/crypto-config/peerOrganizations/org1.example.com/ca/ca.org1.example.com-cert.pem
+    registrar:
+      - enrollId: admin
+        enrollSecret: adminpw
+    caName: ca.org1.example.com
