@@ -4,7 +4,7 @@ version: "1.0"
 channels:
   mychannel:
     orderers:
-      - orderer.example.com
+      - ec2-13-59-126-206.us-east-2.compute.amazonaws.com
 
     peers:
       peer0.org1.example.com:
@@ -12,6 +12,18 @@ channels:
         chaincodeQuery: true
         ledgerQuery: true
         eventSource: true
+
+      peer0.org2.example.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+
+      peer1.org2.example.com:
+        endorsingPeer: false
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: false
 
 organizations:
   Org1:
@@ -22,31 +34,59 @@ organizations:
     certificateAuthorities:
       - ca.org1.example.com
     adminPrivateKey:
-      path: artifacts/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/a17418e1bda56ba78dcc10f9c3b918b79f9cc34e1b3b95df869dfed3a32b51a9_sk
+      path: artifacts/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/dfda1333c2e184a697aa3ca4192473ff39e14472534afe44a7a5b5ab26a887ad_sk
     signedCert:
       path: artifacts/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/Admin@org1.example.com-cert.pem
 
+  Org2:
+    mspid: Org2MSP
+    peers:
+      - peer0.org2.example.com
+      - peer1.org2.example.com
+    certificateAuthorities:
+      - ca.org2.example.com
+    adminPrivateKey:
+      path: artifacts/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/keystore/e320fa22b617574f85fcd611f767fdc0b741533b611585b0e47303bb75390b1c_sk
+    signedCert:
+      path: artifacts/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/signcerts/Admin@org2.example.com-cert.pem
+
 orderers:
-  orderer.example.com:
-    url: grpcs://ec2-18-220-228-226.us-east-2.compute.amazonaws.com:7050
+  ec2-13-59-126-206.us-east-2.compute.amazonaws.com:
+    url: grpcs://ec2-13-59-126-206.us-east-2.compute.amazonaws.com:7050
     grpcOptions:
-      ssl-target-name-override: orderer.example.com
+      ssl-target-name-override: ec2-13-59-126-206.us-east-2.compute.amazonaws.com
       grpc-max-send-message-length: 15
     tlsCACerts:
-      path: artifacts/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/ca.crt
+      path: artifacts/crypto-config/ordererOrganizations/example.com/orderers/ec2-13-59-126-206.us-east-2.compute.amazonaws.com/tls/ca.crt
 
 peers:
   peer0.org1.example.com:
-    url: grpcs://ec2-18-216-131-17.us-east-2.compute.amazonaws.com:7051
-    eventUrl: grpcs://ec2-18-216-131-17.us-east-2.compute.amazonaws.com:7053
+    url: grpcs://ec2-18-218-56-221.us-east-2.compute.amazonaws.com:7051
+    eventUrl: grpcs://ec2-18-218-56-221.us-east-2.compute.amazonaws.com:7053
     grpcOptions:
       ssl-target-name-override: peer0.org1.example.com
     tlsCACerts:
       path: artifacts/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
 
+  peer0.org2.example.com:
+    url: grpcs://ec2-13-54-219-245.ap-southeast-2.compute.amazonaws.com:7051
+    eventUrl: grpcs://ec2-13-54-219-245.ap-southeast-2.compute.amazonaws.com:7053
+    grpcOptions:
+      ssl-target-name-override: peer0.org2.example.com
+    tlsCACerts:
+      path: artifacts/crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
+
+  peer1.org2.example.com:
+    url: grpcs://localhost:7051
+    eventUrl: grpcs://localhost:7053
+    grpcOptions:
+      ssl-target-name-override: peer1.org2.example.com
+    tlsCACerts:
+      path: artifacts/crypto-config/peerOrganizations/org2.example.com/peers/peer1.org2.example.com/tls/ca.crt
+
 certificateAuthorities:
   ca.org1.example.com:
-    url: https://ec2-18-216-131-17.us-east-2.compute.amazonaws.com:7054
+    url: https://ec2-18-218-56-221.us-east-2.compute.amazonaws.com:7054
     httpOptions:
       verify: false
     tlsCACerts:
@@ -55,3 +95,14 @@ certificateAuthorities:
       - enrollId: admin
         enrollSecret: adminpw
     caName: ca.org1.example.com
+
+  ca.org2.example.com:
+    url: https://ec2-13-54-219-245.ap-southeast-2.compute.amazonaws.com:7054
+    httpOptions:
+      verify: false
+    tlsCACerts:
+      path: artifacts/crypto-config/peerOrganizations/org2.example.com/ca/ca.org2.example.com-cert.pem
+    registrar:
+      - enrollId: admin
+        enrollSecret: adminpw
+    caName: ca.org2.example.com
