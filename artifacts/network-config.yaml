@@ -27,7 +27,7 @@ organizations:
     certificateAuthorities:
       - ca.org1.hyperfabric.xyz
     adminPrivateKey:
-      path: artifacts/crypto-config/peerOrganizations/org1.hyperfabric.xyz/users/Admin@org1.hyperfabric.xyz/msp/keystore/dfda1333c2e184a697aa3ca4192473ff39e14472534afe44a7a5b5ab26a887ad_sk
+      path: artifacts/crypto-config/peerOrganizations/org1.hyperfabric.xyz/users/Admin@org1.hyperfabric.xyz/msp/keystore/eb44dc4dfa2f9248a7bfc309a1f981f88643a8aca467dc0e33eed03314c89ab8_sk
     signedCert:
       path: artifacts/crypto-config/peerOrganizations/org1.hyperfabric.xyz/users/Admin@org1.hyperfabric.xyz/msp/signcerts/Admin@org1.hyperfabric.xyz-cert.pem
 
@@ -39,13 +39,14 @@ organizations:
     certificateAuthorities:
       - ca.org2.hyperfabric.xyz
     adminPrivateKey:
-      path: artifacts/crypto-config/peerOrganizations/org2.hyperfabric.xyz/users/Admin@org2.hyperfabric.xyz/msp/keystore/e320fa22b617574f85fcd611f767fdc0b741533b611585b0e47303bb75390b1c_sk
+      path: artifacts/crypto-config/peerOrganizations/org2.hyperfabric.xyz/users/Admin@org2.hyperfabric.xyz/msp/keystore/55921243d16d84c09d9c96a06c897105d792da22cc74e65c1aee3ef037ee1906_sk
     signedCert:
       path: artifacts/crypto-config/peerOrganizations/org2.hyperfabric.xyz/users/Admin@org2.hyperfabric.xyz/msp/signcerts/Admin@org2.hyperfabric.xyz-cert.pem
 
 orderers:
   orderer.hyperfabric.xyz:
     url: grpcs://orderer.hyperfabric.xyz:7050
+    #18.216.125.54
     grpcOptions:
       ssl-target-name-override: orderer.hyperfabric.xyz
       grpc-max-send-message-length: 15
@@ -56,6 +57,7 @@ peers:
   peer0.org1.hyperfabric.xyz:
     url: grpcs://peer0.org1.hyperfabric.xyz:7051
     eventUrl: grpcs://peer0.org1.hyperfabric.xyz:7053
+    #18.216.129.191
     grpcOptions:
       ssl-target-name-override: peer0.org1.hyperfabric.xyz
     tlsCACerts:
@@ -64,6 +66,7 @@ peers:
   peer0.org2.hyperfabric.xyz:
     url: grpcs://peer0.org2.hyperfabric.xyz:7051
     eventUrl: grpcs://peer0.org2.hyperfabric.xyz:7053
+    #13.211.139.251
     grpcOptions:
       ssl-target-name-override: peer0.org2.hyperfabric.xyz
     tlsCACerts:
@@ -72,6 +75,7 @@ peers:
 certificateAuthorities:
   ca.org1.hyperfabric.xyz:
     url: https://ca.org1.hyperfabric.xyz:7054
+    #18.216.129.191
     httpOptions:
       verify: false
     tlsCACerts:
@@ -83,6 +87,7 @@ certificateAuthorities:
 
   ca.org2.hyperfabric.xyz:
     url: https://ca.org2.hyperfabric.xyz:7054
+    #13.211.139.251
     httpOptions:
       verify: false
     tlsCACerts:

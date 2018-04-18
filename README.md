@@ -33,7 +33,7 @@ curl -s -X POST \
   -H "authorization: Bearer $BEARERTOKEN" \
   -H "content-type: application/json" \
   -d '{
-	  "peers": ["peer0.org1.example.com"]
+	  "peers": ["peer0.org1.hyperfabric.xyz"]
 }'
 ```
 
@@ -43,7 +43,7 @@ curl -s -X POST \
   -H "authorization: Bearer $BEARERTOKEN" \
   -H "content-type: application/json" \
   -d '{
-	"peers": ["peer0.org1.example.com"],
+	"peers": ["peer0.org1.hyperfabric.xyz"],
 	"chaincodeName":"mycc",
 	"chaincodePath":"mychaincode",
 	"chaincodeType": "golang",
@@ -57,7 +57,7 @@ curl -s -X POST \
   -H "authorization: Bearer $BEARERTOKEN" \
   -H "content-type: application/json" \
   -d '{
-	"peers": ["peer0.org1.example.com"],
+	"peers": ["peer0.org1.hyperfabric.xyz"],
 	"chaincodeName":"mycc",
 	"chaincodeVersion":"v0",
 	"chaincodeType": "golang",
@@ -71,7 +71,7 @@ curl -s -X POST \
   -H "authorization: Bearer $BEARERTOKEN" \
   -H "content-type: application/json" \
   -d '{
-	"peers": ["peer0.org1.example.com"],
+	"peers": ["peer0.org1.hyperfabric.xyz"],
 	"fcn":"createCourse",
 	"args":["AAAA","CourseA"]
 }'
@@ -79,48 +79,48 @@ curl -s -X POST \
 
 ```
 curl -s -X GET \
-  "http://localhost:4000/channels/mychannel/chaincodes/mycc?peer=peer0.org1.example.com&fcn=query&args=%5B%22AAAA%22%5D" \
+  "http://localhost:4000/channels/mychannel/chaincodes/mycc?peer=peer0.org1.hyperfabric.xyz&fcn=query&args=%5B%22AAAA%22%5D" \
   -H "authorization: Bearer $BEARERTOKEN" \
   -H "content-type: application/json"
 ```
 
 ```
 curl -s -X GET \
-  "http://localhost:4000/channels/mychannel/blocks/1?peer=peer0.org1.example.com" \
+  "http://localhost:4000/channels/mychannel/blocks/1?peer=peer0.org1.hyperfabric.xyz" \
   -H "authorization: Bearer $BEARERTOKEN" \
   -H "content-type: application/json"
 ```
 
 ```
-curl -s -X GET http://localhost:4000/channels/mychannel/transactions/$TRANSACTIONID?peer=peer0.org1.example.com \
-  -H "authorization: Bearer $BEARERTOKEN" \
-  -H "content-type: application/json"
-```
-
-```
-curl -s -X GET \
-  "http://localhost:4000/channels/mychannel?peer=peer0.org1.example.com" \
+curl -s -X GET http://localhost:4000/channels/mychannel/transactions/$TRANSACTIONID?peer=peer0.org1.hyperfabric.xyz \
   -H "authorization: Bearer $BEARERTOKEN" \
   -H "content-type: application/json"
 ```
 
 ```
 curl -s -X GET \
-  "http://localhost:4000/chaincodes?peer=peer0.org1.example.com&type=installed" \
+  "http://localhost:4000/channels/mychannel?peer=peer0.org1.hyperfabric.xyz" \
   -H "authorization: Bearer $BEARERTOKEN" \
   -H "content-type: application/json"
 ```
 
 ```
 curl -s -X GET \
-  "http://localhost:4000/chaincodes?peer=peer0.org1.example.com&type=instantiated" \
+  "http://localhost:4000/chaincodes?peer=peer0.org1.hyperfabric.xyz&type=installed" \
   -H "authorization: Bearer $BEARERTOKEN" \
   -H "content-type: application/json"
 ```
 
 ```
 curl -s -X GET \
-  "http://localhost:4000/channels?peer=peer0.org1.example.com" \
+  "http://localhost:4000/chaincodes?peer=peer0.org1.hyperfabric.xyz&type=instantiated" \
+  -H "authorization: Bearer $BEARERTOKEN" \
+  -H "content-type: application/json"
+```
+
+```
+curl -s -X GET \
+  "http://localhost:4000/channels?peer=peer0.org1.hyperfabric.xyz" \
   -H "authorization: Bearer $BEARERTOKEN" \
   -H "content-type: application/json"
 ```
