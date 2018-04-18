@@ -4,105 +4,90 @@ version: "1.0"
 channels:
   mychannel:
     orderers:
-      - ec2-13-59-126-206.us-east-2.compute.amazonaws.com
+      - orderer.hyperfabric.xyz
 
     peers:
-      peer0.org1.example.com:
+      peer0.org1.hyperfabric.xyz:
         endorsingPeer: true
         chaincodeQuery: true
         ledgerQuery: true
         eventSource: true
 
-      peer0.org2.example.com:
+      peer0.org2.hyperfabric.xyz:
         endorsingPeer: true
         chaincodeQuery: true
         ledgerQuery: true
         eventSource: true
-
-      peer1.org2.example.com:
-        endorsingPeer: false
-        chaincodeQuery: true
-        ledgerQuery: true
-        eventSource: false
 
 organizations:
   Org1:
     mspid: Org1MSP
-
     peers:
-      - peer0.org1.example.com
+      - peer0.org1.hyperfabric.xyz
     certificateAuthorities:
-      - ca.org1.example.com
+      - ca.org1.hyperfabric.xyz
     adminPrivateKey:
-      path: artifacts/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/dfda1333c2e184a697aa3ca4192473ff39e14472534afe44a7a5b5ab26a887ad_sk
+      path: artifacts/crypto-config/peerOrganizations/org1.hyperfabric.xyz/users/Admin@org1.hyperfabric.xyz/msp/keystore/dfda1333c2e184a697aa3ca4192473ff39e14472534afe44a7a5b5ab26a887ad_sk
     signedCert:
-      path: artifacts/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/Admin@org1.example.com-cert.pem
+      path: artifacts/crypto-config/peerOrganizations/org1.hyperfabric.xyz/users/Admin@org1.hyperfabric.xyz/msp/signcerts/Admin@org1.hyperfabric.xyz-cert.pem
 
   Org2:
     mspid: Org2MSP
     peers:
-      - peer0.org2.example.com
-      - peer1.org2.example.com
+      - peer0.org2.hyperfabric.xyz
+      - peer1.org2.hyperfabric.xyz
     certificateAuthorities:
-      - ca.org2.example.com
+      - ca.org2.hyperfabric.xyz
     adminPrivateKey:
-      path: artifacts/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/keystore/e320fa22b617574f85fcd611f767fdc0b741533b611585b0e47303bb75390b1c_sk
+      path: artifacts/crypto-config/peerOrganizations/org2.hyperfabric.xyz/users/Admin@org2.hyperfabric.xyz/msp/keystore/e320fa22b617574f85fcd611f767fdc0b741533b611585b0e47303bb75390b1c_sk
     signedCert:
-      path: artifacts/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/signcerts/Admin@org2.example.com-cert.pem
+      path: artifacts/crypto-config/peerOrganizations/org2.hyperfabric.xyz/users/Admin@org2.hyperfabric.xyz/msp/signcerts/Admin@org2.hyperfabric.xyz-cert.pem
 
 orderers:
-  ec2-13-59-126-206.us-east-2.compute.amazonaws.com:
-    url: grpcs://ec2-13-59-126-206.us-east-2.compute.amazonaws.com:7050
+  orderer.hyperfabric.xyz:
+    url: grpcs://orderer.hyperfabric.xyz:7050
     grpcOptions:
-      ssl-target-name-override: ec2-13-59-126-206.us-east-2.compute.amazonaws.com
+      ssl-target-name-override: orderer.hyperfabric.xyz
       grpc-max-send-message-length: 15
     tlsCACerts:
-      path: artifacts/crypto-config/ordererOrganizations/example.com/orderers/ec2-13-59-126-206.us-east-2.compute.amazonaws.com/tls/ca.crt
+      path: artifacts/crypto-config/ordererOrganizations/hyperfabric.xyz/orderers/orderer.hyperfabric.xyz/tls/ca.crt
 
 peers:
-  peer0.org1.example.com:
-    url: grpcs://ec2-18-218-56-221.us-east-2.compute.amazonaws.com:7051
-    eventUrl: grpcs://ec2-18-218-56-221.us-east-2.compute.amazonaws.com:7053
+  peer0.org1.hyperfabric.xyz:
+    url: grpcs://peer0.org1.hyperfabric.xyz:7051
+    eventUrl: grpcs://peer0.org1.hyperfabric.xyz:7053
     grpcOptions:
-      ssl-target-name-override: peer0.org1.example.com
+      ssl-target-name-override: peer0.org1.hyperfabric.xyz
     tlsCACerts:
-      path: artifacts/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
+      path: artifacts/crypto-config/peerOrganizations/org1.hyperfabric.xyz/peers/peer0.org1.hyperfabric.xyz/tls/ca.crt
 
-  peer0.org2.example.com:
-    url: grpcs://ec2-13-54-219-245.ap-southeast-2.compute.amazonaws.com:7051
-    eventUrl: grpcs://ec2-13-54-219-245.ap-southeast-2.compute.amazonaws.com:7053
+  peer0.org2.hyperfabric.xyz:
+    url: grpcs://peer0.org2.hyperfabric.xyz:7051
+    eventUrl: grpcs://peer0.org2.hyperfabric.xyz:7053
     grpcOptions:
-      ssl-target-name-override: peer0.org2.example.com
+      ssl-target-name-override: peer0.org2.hyperfabric.xyz
     tlsCACerts:
-      path: artifacts/crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
-
-  peer1.org2.example.com:
-    url: grpcs://localhost:7051
-    eventUrl: grpcs://localhost:7053
-    grpcOptions:
-      ssl-target-name-override: peer1.org2.example.com
-    tlsCACerts:
-      path: artifacts/crypto-config/peerOrganizations/org2.example.com/peers/peer1.org2.example.com/tls/ca.crt
+      path: artifacts/crypto-config/peerOrganizations/org2.hyperfabric.xyz/peers/peer0.org2.hyperfabric.xyz/tls/ca.crt
 
 certificateAuthorities:
-  ca.org1.example.com:
-    url: https://ec2-18-218-56-221.us-east-2.compute.amazonaws.com:7054
+  ca.org1.hyperfabric.xyz:
+    url: https://ca.org1.hyperfabric.xyz:7054
     httpOptions:
       verify: false
     tlsCACerts:
-      path: artifacts/crypto-config/peerOrganizations/org1.example.com/ca/ca.org1.example.com-cert.pem
+      path: artifacts/crypto-config/peerOrganizations/org1.hyperfabric.xyz/ca/ca.org1.hyperfabric.xyz-cert.pem
     registrar:
       - enrollId: admin
         enrollSecret: adminpw
-    caName: ca.org1.example.com
+    caName: ca.org1.hyperfabric.xyz
 
-  ca.org2.example.com:
-    url: https://ec2-13-54-219-245.ap-southeast-2.compute.amazonaws.com:7054
+  ca.org2.hyperfabric.xyz:
+    url: https://ca.org2.hyperfabric.xyz:7054
     httpOptions:
       verify: false
     tlsCACerts:
-      path: artifacts/crypto-config/peerOrganizations/org2.example.com/ca/ca.org2.example.com-cert.pem
+      path: artifacts/crypto-config/peerOrganizations/org2.hyperfabric.xyz/ca/ca.org2.hyperfabric.xyz-cert.pem
     registrar:
       - enrollId: admin
         enrollSecret: adminpw
-    caName: ca.org2.example.com
+    caName: ca.org2.hyperfabric.xyz
