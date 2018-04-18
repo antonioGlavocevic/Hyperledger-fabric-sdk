@@ -13,12 +13,6 @@ channels:
         ledgerQuery: true
         eventSource: true
 
-      peer1.org1.hyperfabric.xyz:
-        endorsingPeer: false
-        chaincodeQuery: true
-        ledgerQuery: true
-        eventSource: false
-
       peer0.org2.hyperfabric.xyz:
         endorsingPeer: true
         chaincodeQuery: true
@@ -30,7 +24,6 @@ organizations:
     mspid: Org1MSP
     peers:
       - peer0.org1.hyperfabric.xyz
-      - peer1.org1.hyperfabric.xyz
     certificateAuthorities:
       - ca.org1.hyperfabric.xyz
     adminPrivateKey:
@@ -42,7 +35,6 @@ organizations:
     mspid: Org2MSP
     peers:
       - peer0.org2.hyperfabric.xyz
-      - peer1.org2.hyperfabric.xyz
     certificateAuthorities:
       - ca.org2.hyperfabric.xyz
     adminPrivateKey:
@@ -53,7 +45,6 @@ organizations:
 orderers:
   orderer.hyperfabric.xyz:
     url: grpcs://orderer.hyperfabric.xyz:7050
-    #18.216.125.54
     grpcOptions:
       ssl-target-name-override: orderer.hyperfabric.xyz
       grpc-max-send-message-length: 15
@@ -64,25 +55,14 @@ peers:
   peer0.org1.hyperfabric.xyz:
     url: grpcs://peer0.org1.hyperfabric.xyz:7051
     eventUrl: grpcs://peer0.org1.hyperfabric.xyz:7053
-    #18.216.129.191
     grpcOptions:
       ssl-target-name-override: peer0.org1.hyperfabric.xyz
     tlsCACerts:
       path: artifacts/crypto-config/peerOrganizations/org1.hyperfabric.xyz/peers/peer0.org1.hyperfabric.xyz/tls/ca.crt
 
-  peer1.org1.hyperfabric.xyz:
-    url: grpcs://localhost:7051
-    eventUrl: grpcs://localhost:7053
-    #18.216.129.191
-    grpcOptions:
-      ssl-target-name-override: peer1.org1.hyperfabric.xyz
-    tlsCACerts:
-      path: artifacts/crypto-config/peerOrganizations/org1.hyperfabric.xyz/peers/peer1.org1.hyperfabric.xyz/tls/ca.crt
-
   peer0.org2.hyperfabric.xyz:
     url: grpcs://peer0.org2.hyperfabric.xyz:7051
     eventUrl: grpcs://peer0.org2.hyperfabric.xyz:7053
-    #13.211.139.251
     grpcOptions:
       ssl-target-name-override: peer0.org2.hyperfabric.xyz
     tlsCACerts:
@@ -91,7 +71,6 @@ peers:
 certificateAuthorities:
   ca.org1.hyperfabric.xyz:
     url: https://ca.org1.hyperfabric.xyz:7054
-    #18.216.129.191
     httpOptions:
       verify: false
     tlsCACerts:
@@ -103,7 +82,6 @@ certificateAuthorities:
 
   ca.org2.hyperfabric.xyz:
     url: https://ca.org2.hyperfabric.xyz:7054
-    #13.211.139.251
     httpOptions:
       verify: false
     tlsCACerts:

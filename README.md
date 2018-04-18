@@ -1,17 +1,17 @@
 # SETUP
-Install the fabric-client and fabric-ca-client node modules
-```sh
+Install the fabric-client and fabric-ca-client and other dependency node modules
+```
 npm install
 ```
 Launch the app
-```sh
-PORT=4000 node app
+```
+node app
 ```
 In a separate terminal run the REST API request examples.
 
 # REST API REQUEST EXAMPLES
 ```
-curl -s -X POST http://localhost:4000/users -H "content-type: application/x-www-form-urlencoded" -d 'username=Jim&orgName=Org1'
+curl -s -X POST http://localhost:4000/users -H "content-type: application/x-www-form-urlencoded" -d 'username=User1&orgName=Org1'
 ```
 
 Save the token returned to environmental variable BEARERTOKEN
