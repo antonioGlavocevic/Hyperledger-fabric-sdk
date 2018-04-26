@@ -67,7 +67,7 @@ orderers:
       path: artifacts/crypto-config/ordererOrganizations/hyperfabric.xyz/orderers/orderer0.hyperfabric.xyz/tls/ca.crt
 
   orderer1.hyperfabric.xyz:
-    url: grpcs://orderer1.hyperfabric.xyz:7050
+    url: grpcs://orderer1.hyperfabric.xyz:8050
     grpcOptions:
       ssl-target-name-override: orderer1.hyperfabric.xyz
       grpc-max-send-message-length: 15
