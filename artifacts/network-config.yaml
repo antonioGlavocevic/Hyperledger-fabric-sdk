@@ -4,7 +4,8 @@ version: "1.0"
 channels:
   mychannel:
     orderers:
-      - orderer.hyperfabric.xyz
+      - orderer0.hyperfabric.xyz
+      - orderer1.hyperfabric.xyz
 
     peers:
       peer0.org1.hyperfabric.xyz:
@@ -25,6 +26,12 @@ channels:
         ledgerQuery: true
         eventSource: true
 
+      peer1.org2.hyperfabric.xyz:
+        endorsingPeer: false
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: false
+
 organizations:
   Org1:
     mspid: Org1MSP
@@ -34,7 +41,7 @@ organizations:
     certificateAuthorities:
       - ca.org1.hyperfabric.xyz
     adminPrivateKey:
-      path: artifacts/crypto-config/peerOrganizations/org1.hyperfabric.xyz/users/Admin@org1.hyperfabric.xyz/msp/keystore/eb44dc4dfa2f9248a7bfc309a1f981f88643a8aca467dc0e33eed03314c89ab8_sk
+      path: artifacts/crypto-config/peerOrganizations/org1.hyperfabric.xyz/users/Admin@org1.hyperfabric.xyz/msp/keystore/0e5ca94a3a309bfbb904a3af7d0bea55b7d31cfa50889f25a0b5b91baca6e5f0_sk
     signedCert:
       path: artifacts/crypto-config/peerOrganizations/org1.hyperfabric.xyz/users/Admin@org1.hyperfabric.xyz/msp/signcerts/Admin@org1.hyperfabric.xyz-cert.pem
 
@@ -42,21 +49,30 @@ organizations:
     mspid: Org2MSP
     peers:
       - peer0.org2.hyperfabric.xyz
+      - peer1.org2.hyperfabric.xyz
     certificateAuthorities:
       - ca.org2.hyperfabric.xyz
     adminPrivateKey:
-      path: artifacts/crypto-config/peerOrganizations/org2.hyperfabric.xyz/users/Admin@org2.hyperfabric.xyz/msp/keystore/55921243d16d84c09d9c96a06c897105d792da22cc74e65c1aee3ef037ee1906_sk
+      path: artifacts/crypto-config/peerOrganizations/org2.hyperfabric.xyz/users/Admin@org2.hyperfabric.xyz/msp/keystore/72837b88c768a164f466e56c28cd51d050844b68d186beaafac6c8d7b06c5fcf_sk
     signedCert:
       path: artifacts/crypto-config/peerOrganizations/org2.hyperfabric.xyz/users/Admin@org2.hyperfabric.xyz/msp/signcerts/Admin@org2.hyperfabric.xyz-cert.pem
 
 orderers:
-  orderer.hyperfabric.xyz:
-    url: grpcs://orderer.hyperfabric.xyz:7050
+  orderer0.hyperfabric.xyz:
+    url: grpcs://orderer0.hyperfabric.xyz:7050
     grpcOptions:
-      ssl-target-name-override: orderer.hyperfabric.xyz
+      ssl-target-name-override: orderer0.hyperfabric.xyz
       grpc-max-send-message-length: 15
     tlsCACerts:
-      path: artifacts/crypto-config/ordererOrganizations/hyperfabric.xyz/orderers/orderer.hyperfabric.xyz/tls/ca.crt
+      path: artifacts/crypto-config/ordererOrganizations/hyperfabric.xyz/orderers/orderer0.hyperfabric.xyz/tls/ca.crt
+
+  orderer1.hyperfabric.xyz:
+    url: grpcs://orderer1.hyperfabric.xyz:7050
+    grpcOptions:
+      ssl-target-name-override: orderer1.hyperfabric.xyz
+      grpc-max-send-message-length: 15
+    tlsCACerts:
+      path: artifacts/crypto-config/ordererOrganizations/hyperfabric.xyz/orderers/orderer1.hyperfabric.xyz/tls/ca.crt
 
 peers:
   peer0.org1.hyperfabric.xyz:
@@ -68,8 +84,8 @@ peers:
       path: artifacts/crypto-config/peerOrganizations/org1.hyperfabric.xyz/peers/peer0.org1.hyperfabric.xyz/tls/ca.crt
 
   peer1.org1.hyperfabric.xyz:
-    url: grpcs://peer1.org1.hyperfabric.xyz:7051
-    eventUrl: grpcs://peer1.org1.hyperfabric.xyz:7053
+    url: grpcs://peer1.org1.hyperfabric.xyz:7056
+    eventUrl: grpcs://peer1.org1.hyperfabric.xyz:7058
     grpcOptions:
       ssl-target-name-override: peer1.org1.hyperfabric.xyz
     tlsCACerts:
@@ -82,6 +98,14 @@ peers:
       ssl-target-name-override: peer0.org2.hyperfabric.xyz
     tlsCACerts:
       path: artifacts/crypto-config/peerOrganizations/org2.hyperfabric.xyz/peers/peer0.org2.hyperfabric.xyz/tls/ca.crt
+
+  peer1.org2.hyperfabric.xyz:
+    url: grpcs://peer1.org2.hyperfabric.xyz:7056
+    eventUrl: grpcs://peer1.org2.hyperfabric.xyz:7058
+    grpcOptions:
+      ssl-target-name-override: peer1.org2.hyperfabric.xyz
+    tlsCACerts:
+      path: artifacts/crypto-config/peerOrganizations/org2.hyperfabric.xyz/peers/peer1.org2.hyperfabric.xyz/tls/ca.crt
 
 certificateAuthorities:
   ca.org1.hyperfabric.xyz:
