@@ -19,6 +19,12 @@ channels:
         ledgerQuery: true
         eventSource: false
 
+      peer2.org1.hyperfabric.xyz:
+        endorsingPeer: false
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: false
+
       peer0.org2.hyperfabric.xyz:
         endorsingPeer: true
         chaincodeQuery: true
@@ -31,6 +37,7 @@ organizations:
     peers:
       - peer0.org1.hyperfabric.xyz
       - peer1.org1.hyperfabric.xyz
+      - peer2.org1.hyperfabric.xyz
     certificateAuthorities:
       - ca.org1.hyperfabric.xyz
     adminPrivateKey:
@@ -74,6 +81,14 @@ peers:
       ssl-target-name-override: peer1.org1.hyperfabric.xyz
     tlsCACerts:
       path: artifacts/crypto-config/peerOrganizations/org1.hyperfabric.xyz/peers/peer1.org1.hyperfabric.xyz/tls/ca.crt
+
+  peer2.org1.hyperfabric.xyz:
+    url: grpcs://peer2.org1.hyperfabric.xyz:7051
+    eventUrl: grpcs://peer2.org1.hyperfabric.xyz:7053
+    grpcOptions:
+      ssl-target-name-override: peer2.org1.hyperfabric.xyz
+    tlsCACerts:
+      path: artifacts/crypto-config/peerOrganizations/org1.hyperfabric.xyz/peers/peer2.org1.hyperfabric.xyz/tls/ca.crt
 
   peer0.org2.hyperfabric.xyz:
     url: grpcs://peer0.org2.hyperfabric.xyz:7051
