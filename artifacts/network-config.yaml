@@ -32,6 +32,18 @@ channels:
         ledgerQuery: true
         eventSource: false
 
+      peer0.org3.hyperfabric.xyz:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+
+      peer1.org3.hyperfabric.xyz:
+        endorsingPeer: false
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: false
+
 organizations:
   Org1:
     mspid: Org1MSP
@@ -56,6 +68,18 @@ organizations:
       path: artifacts/crypto-config/peerOrganizations/org2.hyperfabric.xyz/users/Admin@org2.hyperfabric.xyz/msp/keystore/72837b88c768a164f466e56c28cd51d050844b68d186beaafac6c8d7b06c5fcf_sk
     signedCert:
       path: artifacts/crypto-config/peerOrganizations/org2.hyperfabric.xyz/users/Admin@org2.hyperfabric.xyz/msp/signcerts/Admin@org2.hyperfabric.xyz-cert.pem
+
+  Org3:
+    mspid: Org3MSP
+    peers:
+      - peer0.org3.hyperfabric.xyz
+      - peer1.org3.hyperfabric.xyz
+    certificateAuthorities:
+      - ca.org3.hyperfabric.xyz
+    adminPrivateKey:
+      path: artifacts/org3-artifacts/crypto-config/peerOrganizations/org3.hyperfabric.xyz/users/Admin@org3.hyperfabric.xyz/msp/keystore/5abb1fcebd975dec5d7e9705e3c86758cc27fddc02066aef8fce63846a43cce1_sk
+    signedCert:
+      path: artifacts/org3-artifacts/crypto-config/peerOrganizations/org3.hyperfabric.xyz/users/Admin@org3.hyperfabric.xyz/msp/signcerts/Admin@org3.hyperfabric.xyz-cert.pem
 
 orderers:
   orderer0.hyperfabric.xyz:
@@ -107,6 +131,22 @@ peers:
     tlsCACerts:
       path: artifacts/crypto-config/peerOrganizations/org2.hyperfabric.xyz/peers/peer1.org2.hyperfabric.xyz/tls/ca.crt
 
+  peer0.org3.hyperfabric.xyz:
+    url: grpcs://peer0.org3.hyperfabric.xyz:7051
+    eventUrl: grpcs://peer0.org3.hyperfabric.xyz:7053
+    grpcOptions:
+      ssl-target-name-override: peer0.org3.hyperfabric.xyz
+    tlsCACerts:
+      path: artifacts/org3-artifacts/crypto-config/peerOrganizations/org3.hyperfabric.xyz/peers/peer0.org3.hyperfabric.xyz/tls/ca.crt
+
+  peer1.org3.hyperfabric.xyz:
+    url: grpcs://peer1.org3.hyperfabric.xyz:7056
+    eventUrl: grpcs://peer1.org3.hyperfabric.xyz:7058
+    grpcOptions:
+      ssl-target-name-override: peer1.org3.hyperfabric.xyz
+    tlsCACerts:
+      path: artifacts/org3-artifacts/crypto-config/peerOrganizations/org3.hyperfabric.xyz/peers/peer1.org3.hyperfabric.xyz/tls/ca.crt
+
 certificateAuthorities:
   ca.org1.hyperfabric.xyz:
     url: https://ca.org1.hyperfabric.xyz:7054
@@ -129,3 +169,14 @@ certificateAuthorities:
       - enrollId: admin
         enrollSecret: adminpw
     caName: ca.org2.hyperfabric.xyz
+
+  ca.org3.hyperfabric.xyz:
+    url: https://ca.org3.hyperfabric.xyz:7054
+    httpOptions:
+      verify: false
+    tlsCACerts:
+      path: artifacts/org3-artifacts/crypto-config/peerOrganizations/org3.hyperfabric.xyz/ca/ca.org3.hyperfabric.xyz-cert.pem
+    registrar:
+      - enrollId: admin
+        enrollSecret: adminpw
+    caName: ca.org3.hyperfabric.xyz
