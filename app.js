@@ -20,8 +20,17 @@ var express = require('express');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var http = require('http');
+var https = require('https');
 var util = require('util');
+var fs = require('fs');
+var key = fs.readFileSync('hyperfabric.xyz.ssl/hyperfabric.xyz.key');
+var cert = fs.readFileSync( 'hyperfabric.xyz.ssl/3d12eda129d92423.crt' );
+var ca = fs.readFileSync( 'hyperfabric.xyz.ssl/gd_bundle-g2-g1.crt' );
+var options = {
+	key: key,
+	cert: cert,
+	ca: ca
+};
 var app = express();
 var expressJWT = require('express-jwt');
 var jwt = require('jsonwebtoken');
@@ -89,7 +98,7 @@ app.use(function(req, res, next) {
 ///////////////////////////////////////////////////////////////////////////////
 //////////////////////////////// START SERVER /////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
-var server = http.createServer(app).listen(port, function() {});
+var server = https.createServer(options, app).listen(port, function() {});
 logger.info('****************** SERVER STARTED ************************');
 logger.info('***************  http://%s:%s  ******************',host,port);
 server.timeout = 240000;
