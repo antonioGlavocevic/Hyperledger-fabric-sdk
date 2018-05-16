@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"github.com/hyperledger/fabric/core/chaincode/lib/cid"
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	pb "github.com/hyperledger/fabric/protos/peer"
 )
@@ -42,6 +43,11 @@ func (t *MyChaincode) Init(stub shim.ChaincodeStubInterface) pb.Response {
 
 // Invoke - Function called on chaincode invoke
 func (t *MyChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
+	err := cid.AssertAttributeValue(stub, "attr1", "A")
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+
 	fmt.Println("mychaincode Invoke")
 	function, args := stub.GetFunctionAndParameters()
 	if function == "reg" {
