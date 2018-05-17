@@ -43,7 +43,7 @@ func (t *MyChaincode) Init(stub shim.ChaincodeStubInterface) pb.Response {
 
 // Invoke - Function called on chaincode invoke
 func (t *MyChaincode) Invoke(stub shim.ChaincodeStubInterface) pb.Response {
-	err := cid.AssertAttributeValue(stub, "attr1", "A")
+	err := cid.AssertAttributeValue(stub, "attr1", "true")
 	if err != nil {
 		return shim.Error(err.Error())
 	}
